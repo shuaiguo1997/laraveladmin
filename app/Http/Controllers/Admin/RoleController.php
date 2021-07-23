@@ -15,12 +15,22 @@ class RoleController extends Controller
     //
     public function index(){
         $where = [];
-        // $data = DB::table('')->join('menulist','menulist.id','=','')->where($where)->orderby('id','desc')->paginate(10);
-        // return view('admin.role.index',['data'=>$data]);
+        $data = $this->RoleModel::where($where)->orderby('id','desc')->paginate(10);
+        foreach ($data as $key => $value) {
+            $info = $value->title;//定义中间变量
+            $arr_title = explode(',',$value['menu_id']);
+            foreach ($arr_title as $k => $v) {
+                // dump($v);
+                $info[$v] = DB::table('menulist')->where('id','=',$v)->value('title');
+            }
+            $value->title = implode(",",$info);
+        }
+        // dd($data);
+        return view('admin.role.index',['data'=>$data]);
     }
 
     public function add(Reaquest $reaquest){
-
+        
     }
 
     public function edit(Reaquest $reaquest){

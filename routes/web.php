@@ -79,3 +79,5 @@ Route::prefix('index')->name('index.')->group(function(){
         return view('index/index');
     });
 });
+
+// Route::redirect('abc', 'https://www.baidu.com', 301);

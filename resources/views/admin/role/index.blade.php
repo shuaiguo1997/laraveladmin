@@ -29,20 +29,17 @@
                                   <th>ID</th>
                                   <th>角色名</th>
                                   <th>拥有权限规则</th>
-                                  <th>状态</th>
+                                  
                                   <th>操作</th>
                               </thead>
                               <tbody>
+                                @foreach ($data as $item) 
                                 <tr>
-                                  <td>1</td>
-                                  <td>超级管理员</td>
-                                  <td>会员列表，问题列表</td>
-                                  <td class="td-status">
-                                    <span class="layui-btn layui-btn-normal layui-btn-mini">已启用</span></td>
+                                  <td>{{$item->id}}</td>
+                                  <td>{{$item->r_name}}</td>
+                                  <td>{{$item->title}}</td>
+                    
                                   <td class="td-manage">
-                                    <a onclick="member_stop(this,'10001')" href="javascript:;"  title="启用">
-                                      <i class="layui-icon">&#xe601;</i>
-                                    </a>
                                     <a title="编辑"  onclick="xadmin.open('编辑','role-add.html')" href="javascript:;">
                                       <i class="layui-icon">&#xe642;</i>
                                     </a>
@@ -51,20 +48,14 @@
                                     </a>
                                   </td>
                                 </tr>
+                                @endforeach
                               </tbody>
                             </table>
                         </div>
                         <div class="layui-card-body ">
-                            <div class="page">
-                                <div>
-                                  <a class="prev" href="">&lt;&lt;</a>
-                                  <a class="num" href="">1</a>
-                                  <span class="current">2</span>
-                                  <a class="num" href="">3</a>
-                                  <a class="num" href="">489</a>
-                                  <a class="next" href="">&gt;&gt;</a>
-                                </div>
-                            </div>
+                          <div class="page">
+                            {{$data->links('admin.layouts.paginate')}}
+                          </div>
                         </div>
                     </div>
                 </div>
