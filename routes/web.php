@@ -63,6 +63,11 @@ Route::prefix('admin')->name('admin.')->middleware(Authenticate::class)->group(f
     Route::prefix('Role')->group(function(){
 
         Route::get('index',[RoleController::class,'index'])->name('Role.index');
+        //添加
+        Route::match(['get', 'post'], 'add', [RoleController::class,'add'])->name('Role.add');
+        //修改
+        Route::match(['get', 'post'], 'edit', [RoleController::class,'edit'])->name('Role.edit');
+        
     });
 
     Route::get('welcome',function(){

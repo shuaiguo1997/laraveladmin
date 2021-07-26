@@ -5,6 +5,7 @@ namespace App\Http\Controllers\admin;
 use Illuminate\Http\Request;
 use App\Models\admin\RoleModel;
 use App\Http\Controllers\Controller;
+// use App\
 use DB;
 
 class RoleController extends Controller
@@ -29,11 +30,11 @@ class RoleController extends Controller
         return view('admin.role.index',['data'=>$data]);
     }
 
-    public function add(Reaquest $reaquest){
-        
+    public function add(Request $Request){
+        return view('admin.role.add');
     }
 
-    public function edit(Reaquest $reaquest){
+    public function edit(Request $Request){
 
     }
 }
