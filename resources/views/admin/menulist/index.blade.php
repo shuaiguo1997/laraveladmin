@@ -23,7 +23,7 @@
                                 <tr>
                                   <th width="70">ID</th>
                                   <th>菜单名</th>
-                                  <th width="50">链接</th>
+                                  <th width="250">链接</th>
                                   <th width="250">操作</th>
                               </thead>
                               <tbody class="x-cate">

@@ -5,14 +5,15 @@
 @section('content')
 <div class="layui-fluid">
     <div class="layui-row">
-        <form action="{{route('admin.Role.add')}}" method="post" class="layui-form layui-form-pane">
+        <form action="{{route('admin.Role.edit')}}" method="post" class="layui-form layui-form-pane">
             @csrf
+            <input type="hidden" name="id" value="{{$data->id}}">
             <div class="layui-form-item">
                 <label for="name" class="layui-form-label">
                     <span class="x-red">*</span>角色名
                 </label>
                 <div class="layui-input-inline">
-                    <input type="text" id="name" name="r_name" required="required" lay-verify="required"
+                    <input type="text" id="name" name="r_name" value="{{$data->r_name}}" required="required" lay-verify="required"
                     autocomplete="off" class="layui-input">
                 </div>
             </div>
@@ -25,12 +26,14 @@
                         @foreach ($category as $item)
                         <tr>
                             <td>
-                                <input type="checkbox" value="{{$item->id}}" name="menu_id[]" lay-skin="primary" lay-filter="father" title="{{$item->title}}">
+                                <input type="checkbox" value="{{$item->id}}" @if (in_array($item->id,$data->menu_id_arr))
+                                checked="checked"
+                                @endif  name="menu_id[]" lay-skin="primary" lay-filter="father" title="{{$item->title}}">
                             </td>
                             <td>
                                 <div class="layui-input-block">
                                     @foreach ($item->son['0'] as $v)
-                                    <input name="menu_id[]" lay-filter="son" lay-skin="primary" type="checkbox" title="{{$v->title}}" value="{{$v->id}}"> 
+                                        <input name="menu_id[]" lay-filter="son" lay-skin="primary" type="checkbox" title="{{$v->title}}" value="{{$v->id}}" @if (in_array($v->id,$data->menu_id_arr)) checked="checked" @endif> 
                                     @endforeach
                                 </div>
                             </td>
@@ -41,7 +44,7 @@
             </div>
             
             <div class="layui-form-item">
-            <button class="layui-btn" lay-submit="" lay-filter="add">增加</button>
+            <button class="layui-btn" lay-submit="" lay-filter="add">修改</button>
           </div>
         </form>
     </div>
@@ -72,7 +75,7 @@
         // console.log(data);
         //发异步，把数据提交给php
         var r_name = $("input[name='r_name']").val();
-
+        var id = $("input[name='id']").val();
         var menu_id = "";
 
         $('input[type=checkbox]:checked').each(function() {
@@ -85,7 +88,7 @@
             layer.msg('角色权限不能为空',{icon:5});return false;
         }
 
-        $.post("{{route('admin.Role.add')}}",{'_token':'{{csrf_token()}}',r_name:r_name,menu_id:menu_id},function(data){
+        $.post("{{route('admin.Role.edit')}}",{'_token':'{{csrf_token()}}',r_name:r_name,menu_id:menu_id,id:id},function(data){
             // console.log(data);return false;
             if(data.code==200){
                 layer.alert(data.msg, {icon: 6},function () {

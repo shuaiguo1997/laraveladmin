@@ -3,5 +3,5 @@
 
 //ajax返回
 function ajaxreturn($code,$msg){
-    return response()->join(['code'=>$code,'msg'=>$msg]);
+    return response()->json(['code'=>$code,'msg'=>$msg]);
 }

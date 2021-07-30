@@ -66,8 +66,8 @@ Route::prefix('admin')->name('admin.')->middleware(Authenticate::class)->group(f
         //添加
         Route::match(['get', 'post'], 'add', [RoleController::class,'add'])->name('Role.add');
         //修改
-        Route::match(['get', 'post'], 'edit', [RoleController::class,'edit'])->name('Role.edit');
-        
+        Route::match(['get', 'post'], 'edit/{id?}', [RoleController::class,'edit'])->name('Role.edit');
+
     });
 
     Route::get('welcome',function(){
