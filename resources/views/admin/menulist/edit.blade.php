@@ -114,7 +114,7 @@
                                 xadmin.close();
 
                                 // 可以对父窗口进行刷新 
-                                xadmin.father_reload();
+                                top.location.reload();
                             })
                         }
                     },

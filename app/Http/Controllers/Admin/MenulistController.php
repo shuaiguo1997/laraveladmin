@@ -123,5 +123,26 @@ class MenulistController extends Controller
         }
     }
 
+    public function delete(Request $request,MenulistModel $menuModel){
+        $id = $request->post('id');
 
+        if(!$id){
+            return ajaxreturn('400','参数错误');
+        }
+
+        // dd($menuModel->checkdelmenu($id));
+        //判断此菜单有被角色绑定，有被绑定禁止删除
+        $checkdelmenu = $menuModel->checkdelmenu($id);
+        if(!$checkdelmenu){
+            return ajaxreturn('400','此菜单有角色权限绑定，请勿删除');
+        }
+
+        $res = $menuModel->where('id','=',$id)->delete();
+        if($res){
+            return ajaxreturn('200','删除成功');
+        }else{
+            return ajaxreturn('400','删除失败');
+        }
+        // dd($id);
+    }
 }

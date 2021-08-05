@@ -43,7 +43,7 @@
                                       @if ($item->pid==0)
                                         <button class="layui-btn layui-btn-warm layui-btn-xs"  onclick="xadmin.open('添加','{{route('admin.menulist.add',array('pid'=>$item->id))}}')" ><i class="layui-icon">&#xe642;</i>添加子栏目</button>
                                       @endif
-                                      <button class="layui-btn-danger layui-btn layui-btn-xs"  onclick="member_del(this,'要删除的id')" href="javascript:;" ><i class="layui-icon">&#xe640;</i>删除</button>
+                                      <button class="layui-btn-danger layui-btn layui-btn-xs"  onclick="member_del(this,{{$item->id}})" href="javascript:;" ><i class="layui-icon">&#xe640;</i>删除</button>
                                     </td>
                                   </tr>
                                 @endforeach
@@ -66,21 +66,29 @@
             </div>
         </div>
         <script>
-          layui.use('form', function(){
+          layui.use('form', function(){ 
             form = layui.form;
           });
 
           //  /*用户-删除*/
-          // function member_del(obj,id){
-          //     layer.confirm('确认要删除吗？',function(index){
-          //         //发异步删除数据
-          //         $(obj).parents("tr").remove();
-          //         layer.msg('已删除!',{icon:1,time:1000});
-          //     });
-          // }
+          function member_del(obj,id){
+              layer.confirm('确认要删除吗？',function(index){
+                  //发异步删除数据
+                  $.post("{{route('admin.menulist.del')}}",{'_token':'{{csrf_token()}}',id:id},function(res){
+                      if(res.code=='200'){
+                          layer.msg(res.msg,{icon:6,time:1000},function(){
+                            top.location.reload();
+                          });
+                      }else{
+                        layer.msg(res.msg,{icon:5});
+                      }
+                  });
+              });
+          }
             // 分类展开收起的分类的逻辑
           // 
           $(function(){
+            //隐藏子集
             $("tbody.x-cate tr[fid!='0']").hide();
             // 栏目多级显示效果
             $('.x-show').click(function () {

@@ -14,8 +14,16 @@ class RoleController extends Controller
         $this->RoleModel = new RoleModel;
     }
     //
-    public function index(){
+    public function index(Request $Request){
         $where = [];
+
+        $r_name = $Request->get('r_name');
+
+        if($r_name){
+            $where[] = ['r_name', 'LIKE', '%'.$r_name.'%'];
+        }
+
+        // dump($where);
 
         $data = $this->RoleModel::where($where)->orderby('id','desc')->paginate(10);
 
@@ -32,8 +40,8 @@ class RoleController extends Controller
 
             $value->title = implode(",",$info);
         }
-        // dd($data);
-        return view('admin.role.index',['data'=>$data]);
+        // dump($data);
+        return view('admin.role.index',['data'=>$data,'r_name'=>$r_name]);
     }
 
     public function add(Request $Request,RoleModel $RoleModel){

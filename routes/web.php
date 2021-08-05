@@ -45,6 +45,8 @@ Route::prefix('admin')->name('admin.')->middleware(Authenticate::class)->group(f
         Route::match(['get', 'post'], 'add/{pid?}',[MenulistController::class,'add'])->name('menulist.add');
         //编辑
         Route::match(['get', 'post'], 'edit/{ids?}',[MenulistController::class,'edit'])->name('menulist.edit');
+        //删除
+        Route::post('del',[MenulistController::class,'delete'])->name('menulist.del');
 
     });
 

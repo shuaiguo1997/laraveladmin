@@ -15,8 +15,15 @@ class ManagerController extends Controller
         $this->ManagerModel = new ManagerModel;
     }
 
-    public function index(){
-        $data = $this->ManagerModel->orderby('id','desc')->paginate(10);
+    public function index(Request $request){
+        $where = [];
+
+        $username = $request->get('username');
+
+        $where[] = ['username','like','%'.$username.'%'];
+
+        $data = $this->ManagerModel->where($where)->orderby('id','desc')->paginate(10);
+
         return view('Admin.Manager.index',['data'=>$data]);
         // dd($data);
     }
