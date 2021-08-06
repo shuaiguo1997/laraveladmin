@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Admin\ManagerModel;
+use App\Models\Admin\RoleModel;
 
 class ManagerController extends Controller
 {
@@ -28,11 +29,13 @@ class ManagerController extends Controller
         // dd($data);
     }
 
-    public function add(Request $request){
+    public function add(Request $request,RoleModel $roleModel){
 
         $pdata = $request->post();
-        
-        return view('admin.Manager.add');
+    
+        $rolelist = $roleModel::orderby('id','desc')->get(['r_name','id']);
+
+        return view('admin.Manager.add',['rolelist'=>$rolelist]);
         
     }
 

@@ -46,11 +46,12 @@
                   <div class="layui-form-item">
                       <label class="layui-form-label"><span class="x-red">*</span>角色</label>
                       <div class="layui-input-block">
-                        <input type="checkbox" name="like1[write]" lay-skin="primary" title="超级管理员" checked="">
-                        <input type="checkbox" name="like1[read]" lay-skin="primary" title="编辑人员">
-                        <input type="checkbox" name="like1[write]" lay-skin="primary" title="宣传人员" checked="">
+                        @foreach ($rolelist as $item)
+                            <input type="radio" name="role_id" lay-skin="primary" title="{{$item->r_name}}">
+                        @endforeach
                       </div>
                   </div>
+
                   <div class="layui-form-item">
                       <label for="L_pass" class="layui-form-label">
                           <span class="x-red">*</span>密码

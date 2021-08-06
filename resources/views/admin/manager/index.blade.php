@@ -1,6 +1,6 @@
-@extends('admin/parent');
+@extends('admin/parent')
 
-@section('title');
+@section('title')
 
 @section('content')
 <div class="x-nav">
