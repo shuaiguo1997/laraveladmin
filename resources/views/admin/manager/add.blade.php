@@ -16,7 +16,7 @@
                             autocomplete="off" class="layui-input">
                         </div>
                         <div class="layui-form-mid layui-word-aux">
-                            <span class="x-red">*</span>将会成为您唯一的登入名
+                            <span class="x-red">*</span>将会成为您唯一的登入名(请输入中文或者是数字)
                         </div>
                     </div>
                   {{-- <div class="layui-form-item">
@@ -57,7 +57,7 @@
                           <span class="x-red">*</span>密码
                       </label>
                       <div class="layui-input-inline">
-                          <input type="password" id="L_pass" name="pass" required="" lay-verify="pass"
+                          <input type="password" id="L_pass" name="password" required="" lay-verify="pass"
                           autocomplete="off" class="layui-input">
                       </div>
                       <div class="layui-form-mid layui-word-aux">

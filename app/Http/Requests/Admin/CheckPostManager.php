@@ -25,7 +25,19 @@ class CheckPostManager extends FormRequest
     {
         return [
             //
-            
+            'username' => 'required|alpha_num|unique:manager,username',
+            'role_id' => 'required',
+            'password' => 'required',
+        ];
+    }
+
+    public function message(){
+        return [
+            'username.required' => '用户名称不能为空',
+            'username.alpha_num' => '用户名称只能为数字或者字母组成',
+            'username.unique:manager,username' => '用户名重名',
+            'role_id.required' => '请选择角色名称',
+            'password.required' => '密码不能为空',
         ];
     }
 }

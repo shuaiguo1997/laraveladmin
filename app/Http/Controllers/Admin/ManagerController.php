@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Admin\ManagerModel;
 use App\Models\Admin\RoleModel;
+use App\Requests\Admin\CheckPostManager;
+use Illuminate\Support\Facades\Hash;
 
 class ManagerController extends Controller
 {
@@ -29,9 +31,16 @@ class ManagerController extends Controller
         // dd($data);
     }
 
-    public function add(Request $request,RoleModel $roleModel){
+    public function add(CheckPostManager $request,RoleModel $roleModel){
 
         $pdata = $request->post();
+
+        if($request->isMethod('post')){
+            $roleModel->password = Hash::make($request->password);
+            $roleModel->role_id = $request->role_id;
+            $roleModel->username = $request->username;
+            $res = $roleModel->save();
+        }
     
         $rolelist = $roleModel::orderby('id','desc')->get(['r_name','id']);
 
