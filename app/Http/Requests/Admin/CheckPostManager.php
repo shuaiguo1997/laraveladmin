@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Admin;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Http\Request;
 
 class CheckPostManager extends FormRequest
 {
@@ -21,14 +22,22 @@ class CheckPostManager extends FormRequest
      *
      * @return array
      */
-    public function rules()
+    public function rules(Request $Request)
     {
-        return [
-            //
-            'username' => 'required|alpha_num|unique:manager,username',
-            'role_id' => 'required',
-            'password' => 'required',
-        ];
+        if($Request->isMethod('POST'))
+        {
+            
+            return [
+                //   
+                'username' => 'required|alpha_num|unique:manager,username',
+                'role_id' => 'required',
+                'password' => 'required',
+            ];
+                
+        }else{
+            return [];
+        }
+
     }
 
     public function message(){

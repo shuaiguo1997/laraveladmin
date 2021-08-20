@@ -6,45 +6,45 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Admin\ManagerModel;
 use App\Models\Admin\RoleModel;
-use App\Requests\Admin\CheckPostManager;
+use App\Http\Requests\Admin\CheckPostManager;
 use Illuminate\Support\Facades\Hash;
 
 class ManagerController extends Controller
 {
     //
-    private $ManagerModel;
+    // private $ManagerModel;
 
     public function __construct(){
-        $this->ManagerModel = new ManagerModel;
+        
     }
 
-    public function index(Request $request){
+    public function index(Request $request,ManagerModel $ManagerModel){
         $where = [];
 
         $username = $request->get('username');
 
         $where[] = ['username','like','%'.$username.'%'];
 
-        $data = $this->ManagerModel->where($where)->orderby('id','desc')->paginate(10);
+        $data = $ManagerModel->where($where)->orderby('id','desc')->paginate(10);
 
         return view('Admin.Manager.index',['data'=>$data]);
         // dd($data);
     }
 
-    public function add(CheckPostManager $request,RoleModel $roleModel){
-
-        $pdata = $request->post();
-
+    public function adds(RoleModel $roleModel,CheckPostManager $request){
+        // dd('2222222222');
         if($request->isMethod('post')){
             $roleModel->password = Hash::make($request->password);
             $roleModel->role_id = $request->role_id;
             $roleModel->username = $request->username;
+            dd($roleModel);
             $res = $roleModel->save();
         }
     
         $rolelist = $roleModel::orderby('id','desc')->get(['r_name','id']);
+        // dd($rolelist);
 
-        return view('admin.Manager.add',['rolelist'=>$rolelist]);
+        return view('Admin.Manager.adds',['rolelist'=>$rolelist]);
         
     }
 

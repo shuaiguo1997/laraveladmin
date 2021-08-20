@@ -54,10 +54,11 @@ Route::prefix('admin')->name('admin.')->middleware(Authenticate::class)->group(f
     Route::prefix('Manager')->group(function(){
 
         Route::match(['get', 'post'], 'index', [ManagerController::class,'index'])->name('Manager.index');
-        //添加
-        Route::match(['get', 'post'], 'add', [ManagerController::class,'add'])->name('Manager.add');
+        
         //修改
         Route::match(['get', 'post'], 'edit/{id?}', [ManagerController::class,'edit'])->name('Manager.edit');
+        //添加
+        Route::match(['get', 'post'], 'adds', [ManagerController::class,'adds'])->name('Manager.adds');
 
     });
 

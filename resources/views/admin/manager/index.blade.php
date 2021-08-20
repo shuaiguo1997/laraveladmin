@@ -28,8 +28,7 @@
                       </form>
                   </div>
                   <div class="layui-card-header">
-                     
-                      <button class="layui-btn" onclick="xadmin.open('添加用户','{{route('admin.Manager.add')}}',800,600)"><i class="layui-icon"></i>添加</button>
+                      <a class="layui-btn" href="javascript:;" onclick="xadmin.open('添加用户','{{route('admin.Manager.adds')}}',800,600)"><i class="layui-icon"></i>添加</a>
                   </div>
                   <div class="layui-card-body ">
                       <table class="layui-table layui-form">
@@ -40,6 +39,7 @@
                             <th>加入时间</th>
                             <th>状态</th>
                             <th>操作</th>
+                          </tr>
                         </thead>
                         <tbody>
                           @foreach ($data as $item)
