@@ -31,17 +31,18 @@ class ManagerController extends Controller
         // dd($data);
     }
 
-    public function adds(RoleModel $roleModel,CheckPostManager $request){
+    public function adds(ManagerModel $ManagerModel,RoleModel $RoleModel,CheckPostManager $request){
         // dd('2222222222');
         if($request->isMethod('post')){
-            $roleModel->password = Hash::make($request->password);
-            $roleModel->role_id = $request->role_id;
-            $roleModel->username = $request->username;
-            dd($roleModel);
-            $res = $roleModel->save();
+            dd($request->post());
+            $ManagerModel->password = Hash::make($request->password);
+            $ManagerModel->role_id = $request->role_id;
+            $ManagerModel->username = $request->username;
+            // dd($ManagerModel);
+            $res = $ManagerModel->save();
         }
     
-        $rolelist = $roleModel::orderby('id','desc')->get(['r_name','id']);
+        $rolelist = $RoleModel::orderby('id','desc')->get(['r_name','id']);
         // dd($rolelist);
 
         return view('Admin.Manager.adds',['rolelist'=>$rolelist]);

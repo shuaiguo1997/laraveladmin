@@ -5,7 +5,8 @@
 @section('content')
         <div class="layui-fluid">
             <div class="layui-row">
-                <form class="layui-form" method="POST" action="{{route('admin.Manager.adds')}}">
+                <form class="layui-form" method="POST" id="form" action="{{route('admin.Manager.adds')}}">
+                    @csrf
                   <div class="layui-form-item">
                       <label for="username" class="layui-form-label">
                           <span class="x-red">*</span>登录名
@@ -22,7 +23,7 @@
                       <label class="layui-form-label"><span class="x-red">*</span>角色</label>
                       <div class="layui-input-block">
                         @foreach ($rolelist as $item)
-                            <input type="checkbox" name="role_id[]" value="{{$item->id}}" lay-skin="primary" title="{{$item->r_name}}">
+                            <input type="radio" name="role_id" value="{{$item->id}}" lay-skin="primary" title="{{$item->r_name}}">
                         @endforeach
                       </div>
                   </div>
@@ -31,7 +32,7 @@
                           <span class="x-red">*</span>密码
                       </label>
                       <div class="layui-input-inline">
-                          <input type="password" id="L_pass" name="password" required="" lay-verify="pass"
+                          <input type="password" id="L_pass" name="pass" required="" lay-verify="pass"
                           autocomplete="off" class="layui-input">
                       </div>
                       <div class="layui-form-mid layui-word-aux">
@@ -83,7 +84,12 @@
                 function(data) {
                     console.log(data);
                     //发异步，把数据提交给php
-                    // $.post("{{route('admin.Manager.adds')}}",{_token:{{csrf_token()}},})
+                    var username = $("input[name='username']").val();
+                    var role_id = $('input:radio[name=role_id]:checked').val();
+                    var pass = $('input[name="pass"]').val();
+                    $.post("{{route('admin.Manager.adds')}}",{'_token':'{{csrf_token()}}','username':username,'role_id':role_id,'password':password},function(res){
+
+                    });
                     // function() {
                     //     //关闭当前frame
                     //     xadmin.close();
