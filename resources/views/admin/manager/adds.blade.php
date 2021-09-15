@@ -87,7 +87,7 @@
                     var username = $("input[name='username']").val();
                     var role_id = $('input:radio[name=role_id]:checked').val();
                     var pass = $('input[name="pass"]').val();
-                    $.post("{{route('admin.Manager.adds')}}",{'_token':'{{csrf_token()}}','username':username,'role_id':role_id,'password':password},function(res){
+                    $.post("{{route('admin.Manager.adds')}}",{'_token':'{{csrf_token()}}','username':username,'role_id':role_id,'password':pass},function(res){
 
                     });
                     // function() {

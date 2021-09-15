@@ -29,7 +29,7 @@ class CheckPostManager extends FormRequest
             
             return [
                 //   
-                'username' => 'required|alpha_num|unique:manager,username',
+                'username' => 'required|alpha_num|unique:managers,username',
                 'role_id' => 'required',
                 'password' => 'required',
             ];

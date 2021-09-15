@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Admin\ManagerModel;
+use App\Models\Admin\ManagersModel;
 use App\Models\Admin\RoleModel;
 use App\Http\Requests\Admin\CheckPostManager;
 use Illuminate\Support\Facades\Hash;
@@ -18,7 +18,7 @@ class ManagerController extends Controller
         
     }
 
-    public function index(Request $request,ManagerModel $ManagerModel){
+    public function index(Request $request,ManagersModel $ManagerModel){
         $where = [];
 
         $username = $request->get('username');
@@ -31,15 +31,17 @@ class ManagerController extends Controller
         // dd($data);
     }
 
-    public function adds(ManagerModel $ManagerModel,RoleModel $RoleModel,CheckPostManager $request){
+    public function adds(ManagersModel $ManagerModel,RoleModel $RoleModel,CheckPostManager $request){
         // dd('2222222222');
         if($request->isMethod('post')){
-            dd($request->post());
             $ManagerModel->password = Hash::make($request->password);
             $ManagerModel->role_id = $request->role_id;
             $ManagerModel->username = $request->username;
-            // dd($ManagerModel);
+            $ManagerModel->createtime = time();
+            // // dd($ManagerModel);
             $res = $ManagerModel->save();
+            dd($request->post());
+
         }
     
         $rolelist = $RoleModel::orderby('id','desc')->get(['r_name','id']);

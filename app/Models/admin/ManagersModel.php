@@ -5,9 +5,8 @@ namespace App\Models\Admin;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class ManagerModel extends Model
+class ManagersModel extends Model
 {
-    use HasFactory;
-    protected $table = 'managers';
+    protected $table = 'Managers';
     public $timestamps = false;
 }
